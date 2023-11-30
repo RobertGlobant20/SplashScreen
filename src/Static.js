@@ -33,6 +33,7 @@ class Static extends React.Component {
     window.setImportStatus = this.setImportStatus.bind(this);
     window.setTotalLoadingTime = this.setTotalLoadingTime.bind(this);
     window.setEnableSignInButton = this.setEnableSignInButton.bind(this);
+    window.handleSignInStateChange = this.handleSignInStateChange.bind(this);
   }
 
   componentDidMount() {
@@ -188,6 +189,21 @@ class Static extends React.Component {
     }else{
       btn.classList.add('disableButton');
       btn.disabled = true;     
+    }
+  }
+
+  //Handles changes to auth status on splash screen
+  handleSignInStateChange(auth) {
+    let btn = document.getElementById('btnSignIn');
+
+    this.setState({
+      signInStatus:auth.status === 'True'
+    });
+
+    if (auth.status === 'True'){
+      btn.innerHTML = this.props.signOutTitle
+    }else{
+      btn.innerHTML = this.props.signInTitle 
     }
   }
 
