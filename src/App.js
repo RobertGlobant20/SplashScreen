@@ -22,7 +22,6 @@ class App extends React.Component {
 
     //This is a reference to the DOM of the project that will be called in Dynamo to set the title of the splash screen (Defined by 'Welcome to Dynamo!' by default)
     window.setLabels = this.setLabels.bind(this);
-
     window.setLoadingDone = this.setLoadingDone.bind(this);
     window.setSignInStatus = this.setSignInStatus.bind(this);
   }
@@ -39,11 +38,11 @@ class App extends React.Component {
     //TODO : As alternative we can receive the event from the Childs like the Static component
   }
 
-  handleKeyDown = (e) => {    
-    if (e.key === 'Escape'){
-        if (this.state.loadingDone){
-            this.closeDynamo()
-        }
+  handleKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      if (this.state.loadingDone) {
+        this.closeDynamo();
+      }
     }
   };
 
@@ -73,8 +72,10 @@ class App extends React.Component {
                     <Static
                       signInStatus={this.state.signInStatus}
                       signInTitle={this.state.signInTitle}
+                      signInToolTip={this.state.signInToolTip}
                       signingInTitle={this.state.signingInTitle}
                       signOutTitle={this.state.signOutTitle}
+                      signOutToolTip={this.state.signInToolTip}
                       welcomeToDynamoTitle={this.state.welcomeToDynamoTitle}
                       launchTitle={this.state.launchTitle}
                       showScreenAgainLabel={this.state.showScreenAgainLabel}
@@ -103,14 +104,16 @@ class App extends React.Component {
       importSettingsTitle: labels.importSettingsTitle,
       importSettingsTooltipDescription: labels.importSettingsTooltipDescription,
       signInTitle: labels.signInTitle,
+      signInToolTip: labels.signInToolTip,
       signingInTitle: labels.signingInTitle,
-      signOutTitle: labels.signOutTitle
+      signOutTitle: labels.signOutTitle,
+      signOutToolTip: labels.signOutToolTip
     });
   }
 
   //Set the login status from Dynamo
   setSignInStatus(val) {
-    this.setState({      
+    this.setState({
       signInStatus: val.signInStatus === 'True'
     });
   }

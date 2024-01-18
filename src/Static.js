@@ -25,6 +25,7 @@ class Static extends React.Component {
       importStatus: importStatusEnum.none,
       errorDescription: 'Something went wrong when importing your custom setting file. Please try again or proceed with default settings.',
       signInTitle: this.props.signInStatus ? this.props.signOutTitle : this.props.signInTitle,
+      signInTooltip: this.props.signInStatus ? this.props.signOutTooltip : this.props.signInTooltip,
       signInStatus: this.props.signInStatus,
       loadingTime: 'Total loading time: ',
       importSettingsTitle: this.props.importSettingsTitle
@@ -44,15 +45,19 @@ class Static extends React.Component {
     return (
       <Container className='pr-3'>
         <Row className='mt-3'>
-        <button className='secondaryButton' onClick={this.launchDynamo} tabIndex={1}>
+          <button className='secondaryButton' onClick={this.launchDynamo} tabIndex={1}>
             {this.props.launchTitle}
           </button>
         </Row>
 
         <Row className='mt-3'>
-        <button id='btnSignIn' className='primaryButton' onClick={this.signIn} tabIndex={2}>
-            {this.state.signInTitle}
-          </button>
+          <OverlayTrigger placement='right' overlay={
+            <Tooltip>{this.state.signInTooltip}</Tooltip>
+          }>
+            <button id='btnSignIn' className='primaryButton' onClick={this.signIn} tabIndex={2} >
+              {this.state.signInTitle}
+            </button>
+          </OverlayTrigger>
         </Row>
 
         <Row className='mt-3'>
@@ -89,19 +94,21 @@ class Static extends React.Component {
             </label>
           </OverlayTrigger>
         </Row>
+
         <Row className='mt-3'>
           <label className='p-0 checkboxShowScreenAgain '>
             <input
               type='checkbox'
               onChange={this.handleChange}
               className='checkBoxStyle'
-              tabIndex={4}/>
+              tabIndex={4} />
             <span className='checkmark'>
               {' '}
               {this.props.showScreenAgainLabel}{' '}
             </span>
           </label>
         </Row>
+
         <Row className='mt-3'>
           <div className='p-0 loadingTimeFooter' >
             {this.state.loadingTime}
@@ -183,12 +190,12 @@ class Static extends React.Component {
   setEnableSignInButton(enableSignInButton) {
     let btn = document.getElementById('btnSignIn');
 
-    if (enableSignInButton.enable === 'True'){
+    if (enableSignInButton.enable === 'True') {
       btn.classList.remove('disableButton');
       btn.disabled = false;
-    }else{
+    } else {
       btn.classList.add('disableButton');
-      btn.disabled = true;     
+      btn.disabled = true;
     }
   }
 
@@ -197,13 +204,13 @@ class Static extends React.Component {
     let btn = document.getElementById('btnSignIn');
 
     this.setState({
-      signInStatus:auth.status === 'True'
+      signInStatus: auth.status === 'True'
     });
 
-    if (auth.status === 'True'){
-      btn.innerHTML = this.props.signOutTitle
-    }else{
-      btn.innerHTML = this.props.signInTitle 
+    if (auth.status === 'True') {
+      btn.innerHTML = this.props.signOutTitle;
+    } else {
+      btn.innerHTML = this.props.signInTitle;
     }
   }
 
@@ -215,7 +222,7 @@ class Static extends React.Component {
   handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       // We check explicitly the lblImportSettings control due to it's a label that wraps inputs, it's no necessary for the launch and signing buttons because they receive the focus ready to are hit with the Enter key
-      if (document.activeElement.id === 'lblImportSettings'){        
+      if (document.activeElement.id === 'lblImportSettings') {
         document.getElementById('inputImportSettings').click();
       }
     }
@@ -224,18 +231,22 @@ class Static extends React.Component {
 
 Static.defaultProps = {
   signInTitle: 'Sign In',
+  signInTooltip: 'Sign in to access online services that integrate with your desktop software.',
   signingInTitle: 'Signing In',
   signOutTitle: 'Sign Out',
+  signOutTooltip: 'Signing out of Dynamo will sign you out of all Autodesk desktop products.',
   launchTitle: 'Launch Dynamo',
   showScreenAgainLabel: 'Don\'t show this screen again',
   importSettingsTitle: 'Import Settings',
-  importSettingsTooltipDescription: 'You can import custom settings here, which will overwrite your current settings. If you\'d like to preserve a copy of your current settings, export them before importing new settings. Settings not shown in the Preferences panel will be applied once Dynamo and any host program restarts.'  
+  importSettingsTooltipDescription: 'You can import custom settings here, which will overwrite your current settings. If you\'d like to preserve a copy of your current settings, export them before importing new settings. Settings not shown in the Preferences panel will be applied once Dynamo and any host program restarts.'
 };
 
 Static.propTypes = {
   signInTitle: PropTypes.string,
+  signInTooltip: PropTypes.string,
   signingInTitle: PropTypes.string,
   signOutTitle: PropTypes.string,
+  signOutTooltip: PropTypes.string,
   launchTitle: PropTypes.string,
   showScreenAgainLabel: PropTypes.string,
   signInStatus: PropTypes.bool,
