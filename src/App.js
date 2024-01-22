@@ -15,6 +15,7 @@ class App extends React.Component {
     super();
     this.setBackgroundImage();
     this.state = {
+      isChecked: false,
       welcomeToDynamoTitle: 'Welcome to Dynamo!',
       loadingDone: false,
       signInStatus: false
@@ -24,6 +25,12 @@ class App extends React.Component {
     window.setLabels = this.setLabels.bind(this);
     window.setLoadingDone = this.setLoadingDone.bind(this);
     window.setSignInStatus = this.setSignInStatus.bind(this);
+    this.handleCheckedChange = this.handleCheckedChange.bind(this);
+    this.closeDynamo = this.closeDynamo.bind(this);
+  }
+
+  handleCheckedChange = (checked) => {
+    this.setState({isChecked: checked});
   }
 
   setBackgroundImage() {
@@ -81,6 +88,7 @@ class App extends React.Component {
                       showScreenAgainLabel={this.state.showScreenAgainLabel}
                       importSettingsTitle={this.state.importSettingsTitle}
                       importSettingsTooltipDescription={this.state.importSettingsTooltipDescription}
+                      onCheckedChange={this.handleCheckedChange}
                     /> : <Dynamic />
                 }
               </Col>
@@ -127,7 +135,7 @@ class App extends React.Component {
 
   closeDynamo() {
     if (chrome.webview !== undefined) {
-      chrome.webview.hostObjects.scriptObject.CloseWindow();
+      chrome.webview.hostObjects.scriptObject.CloseWindowPreserve(this.state.isChecked);
     }
   }
 }

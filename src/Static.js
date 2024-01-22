@@ -35,10 +35,17 @@ class Static extends React.Component {
     window.setTotalLoadingTime = this.setTotalLoadingTime.bind(this);
     window.setEnableSignInButton = this.setEnableSignInButton.bind(this);
     window.handleSignInStateChange = this.handleSignInStateChange.bind(this);
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  //Every time the checkbox is clicked, this method is called
+  handleChange() {
+    checked = !checked;
+    this.props.onCheckedChange(checked);  
   }
 
   render() {
@@ -212,11 +219,6 @@ class Static extends React.Component {
     } else {
       btn.innerHTML = this.props.signInTitle;
     }
-  }
-
-  //Every time the checkbox is clicked, this method is called
-  handleChange() {
-    checked = !checked;
   }
 
   handleKeyDown = (e) => {
