@@ -31,7 +31,7 @@ class App extends React.Component {
 
   handleCheckedChange = (checked) => {
     this.setState({isChecked: checked});
-  }
+  };
 
   setBackgroundImage() {
     let backgroundImage = '#base64BackgroundImage';
@@ -139,4 +139,5 @@ class App extends React.Component {
     }
   }
 }
+
 export default App;

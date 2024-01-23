@@ -35,7 +35,7 @@ class Static extends React.Component {
     window.setTotalLoadingTime = this.setTotalLoadingTime.bind(this);
     window.setEnableSignInButton = this.setEnableSignInButton.bind(this);
     window.handleSignInStateChange = this.handleSignInStateChange.bind(this);
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -45,7 +45,7 @@ class Static extends React.Component {
   //Every time the checkbox is clicked, this method is called
   handleChange() {
     checked = !checked;
-    this.props.onCheckedChange(checked);  
+    this.props.onCheckedChange(checked);
   }
 
   render() {
@@ -132,7 +132,8 @@ class Static extends React.Component {
         let status = await chrome.webview.hostObjects.scriptObject.SignOut();
         this.setState({
           signInStatus: !status,
-          signInTitle: this.props.signInTitle
+          signInTitle: this.props.signInTitle,
+          signInTooltip: this.props.signInTooltip
         });
       }
       else {
@@ -147,10 +148,16 @@ class Static extends React.Component {
         btn.classList.remove('disableButton');
         btn.disabled = false;
         if (status) {
-          this.setState({ signInTitle: this.props.signOutTitle });
+          this.setState({
+            signInTitle: this.props.signOutTitle,
+            signInTooltip: this.props.signOutTooltip
+          });
         }
         else {
-          this.setState({ signInTitle: this.props.signInTitle });
+          this.setState({
+            signInTitle: this.props.signInTitle,
+            signInTooltip: this.props.signInTooltip
+          });
         }
       }
     }
@@ -208,16 +215,21 @@ class Static extends React.Component {
 
   //Handles changes to auth status on splash screen
   handleSignInStateChange(auth) {
-    let btn = document.getElementById('btnSignIn');
-
     this.setState({
       signInStatus: auth.status === 'True'
     });
 
     if (auth.status === 'True') {
-      btn.innerHTML = this.props.signOutTitle;
-    } else {
-      btn.innerHTML = this.props.signInTitle;
+      this.setState({
+        signInTitle: this.props.signOutTitle,
+        signInTooltip: this.props.signOutTooltip
+      });
+    }
+    else {
+      this.setState({
+        signInTitle: this.props.signInTitle,
+        signInTooltip: this.props.signInTooltip
+      });
     }
   }
 
@@ -253,7 +265,8 @@ Static.propTypes = {
   showScreenAgainLabel: PropTypes.string,
   signInStatus: PropTypes.bool,
   importSettingsTitle: PropTypes.string,
-  importSettingsTooltipDescription: PropTypes.string
+  importSettingsTooltipDescription: PropTypes.string,
+  onCheckedChange: PropTypes.func
 };
 
 export default Static;
