@@ -79,10 +79,10 @@ class App extends React.Component {
                     <Static
                       signInStatus={this.state.signInStatus}
                       signInTitle={this.state.signInTitle}
-                      signInToolTip={this.state.signInToolTip}
+                      signInTooltip={this.state.signInTooltip}
                       signingInTitle={this.state.signingInTitle}
                       signOutTitle={this.state.signOutTitle}
-                      signOutToolTip={this.state.signInToolTip}
+                      signOutTooltip={this.state.signOutTooltip}
                       welcomeToDynamoTitle={this.state.welcomeToDynamoTitle}
                       launchTitle={this.state.launchTitle}
                       showScreenAgainLabel={this.state.showScreenAgainLabel}
@@ -112,10 +112,10 @@ class App extends React.Component {
       importSettingsTitle: labels.importSettingsTitle,
       importSettingsTooltipDescription: labels.importSettingsTooltipDescription,
       signInTitle: labels.signInTitle,
-      signInToolTip: labels.signInToolTip,
+      signInTooltip: labels.signInTooltip,
       signingInTitle: labels.signingInTitle,
       signOutTitle: labels.signOutTitle,
-      signOutToolTip: labels.signOutToolTip
+      signOutTooltip: labels.signOutTooltip
     });
   }
 
