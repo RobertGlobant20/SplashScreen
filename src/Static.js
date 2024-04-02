@@ -135,6 +135,7 @@ class Static extends React.Component {
           signInTitle: this.props.signInTitle,
           signInTooltip: this.props.signInTooltip
         });
+        console.log("signInTooltip1:"+this.props.signInTooltip)
       }
       else {
         let btn = document.getElementById('btnSignIn');
@@ -152,12 +153,14 @@ class Static extends React.Component {
             signInTitle: this.props.signOutTitle,
             signInTooltip: this.props.signOutTooltip
           });
+          console.log("signInTooltip2:"+this.props.signOutTooltip)
         }
         else {
           this.setState({
             signInTitle: this.props.signInTitle,
             signInTooltip: this.props.signInTooltip
           });
+          console.log("signInTooltip3:"+this.props.signInTooltip)
         }
       }
     }
