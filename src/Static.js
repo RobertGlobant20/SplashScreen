@@ -59,7 +59,7 @@ class Static extends React.Component {
 
         <Row className='mt-3'>
           <OverlayTrigger placement='right' overlay={
-            <Tooltip>{this.props.signInStatus ? this.props.signOutTooltip : this.props.signInTooltip}</Tooltip>
+            <Tooltip>{this.state.signInTooltip}</Tooltip>
           }>
             <button id='btnSignIn' className='primaryButton' onClick={this.signIn} tabIndex={2} >
               {this.state.signInTitle}
