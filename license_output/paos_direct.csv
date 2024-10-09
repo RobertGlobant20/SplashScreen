@@ -1,5 +1,5 @@
 publisher,name,version,copyright,dateAdded,estimatedReleaseDate,license,distributed
-"Autodesk Inc.",@dynamods/splash-screen,"1.0.9","Copyright (c) 2023 DynamoDS","","",MIT,false
+"Autodesk Inc.",@dynamods/splash-screen,"1.0.20","Copyright (c) 2024 DynamoDS","","",MIT,false
 "The Bootstrap Authors",bootstrap,"5.2.2","Copyright (c) 2011-2022 Twitter, Inc.. Copyright (c) 2011-2022 The Bootstrap Authors","","",MIT,false
 "Stephen J. Collings",react-bootstrap,"2.5.0","Copyright (c) 2014-present Stephen J. Collings, Matthew Honnibal, Pieter Vanderwerff","","",MIT,false
 "",react-dom,"18.2.0","Copyright (c) Facebook, Inc. and its affiliates.","","",MIT,false
